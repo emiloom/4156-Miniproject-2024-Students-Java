@@ -11,13 +11,27 @@ public class Course implements Serializable {
    * @param courseLocation     The location where the course is held.
    * @param timeSlot           The time slot of the course.
    * @param capacity           The maximum number of students that can enroll in the course.
+   * @param enrolledStudentCount The number of students currently enrolled in the course
    */
-  public Course(String instructorName, String courseLocation, String timeSlot, int capacity) {
+  public Course(String instructorName, String courseLocation, String timeSlot, int capacity, int enrolledStudentCount) {
     this.courseLocation = courseLocation;
     this.instructorName = instructorName;
     this.courseTimeSlot = timeSlot;
     this.enrollmentCapacity = capacity;
-    this.enrolledStudentCount = 500;
+    this.enrolledStudentCount = enrolledStudentCount;
+  }
+  
+  /**
+   * Constructs a new Course object with the given parameters and a default amount of enrolled students set at 500. 
+   * Initial count starts at 0.
+   *
+   * @param instructorName     The name of the instructor teaching the course.
+   * @param courseLocation     The location where the course is held.
+   * @param timeSlot           The time slot of the course.
+   * @param capacity           The maximum number of students that can enroll in the course.
+   */
+  public Course(String instructorName, String courseLocation, String timeSlot, int capacity) {
+    this(instructorName, courseLocation, timeSlot, capacity, 500);
   }
 
  /**
