@@ -1,0 +1,24 @@
+IndividualProjectApplication.java
+1: Was getting index out of bounds in IndividualProjectApplication.java getCourseMap method 
+due to typo in hardcoded lists.
+
+
+RouteController.java
+1. findCourseTime => fixed to have accurate return for course timeslot
+
+
+Department.java
+1. return actual string value rather than "...toString()"
+2. Need to use Map interface instead of just hashmap to then use mock and anyMap() in test
+
+RouteController.java
+1. Missing javadocs
+2. formatting + quotes around a return in find course time
+(these took me way too long)
+3. OK and NOT_FOUND was opposite for retrieveDepartment
+4. FORBIDDEN should be NOT_FOUND in getMajorCtFromDept
+5.  FORBIDDEN should be OK in retrieveCourse
+
+Course.java
+1. Need Override on toString
+2. isCourseFull typo with comparison
