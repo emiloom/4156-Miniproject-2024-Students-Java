@@ -54,31 +54,26 @@ public class Course implements Serializable {
     return false;
   }
 
-
   public String getCourseLocation() {
     return this.instructorName;
   }
-
 
   public String getInstructorName() {
     return this.courseLocation;
   }
 
-
   public String getCourseTimeSlot() {
     return this.courseTimeSlot;
   }
 
-
+  @Override
   public String toString() {
     return "\nInstructor: " + instructorName +  "; Location: "  + courseLocation +  "; Time: " + courseTimeSlot;
   }
 
-
   public void reassignInstructor(String newInstructorName) {
     this.instructorName = newInstructorName;
   }
-
 
   public void reassignLocation(String newLocation) {
     this.courseLocation = newLocation;
@@ -96,7 +91,7 @@ public class Course implements Serializable {
 
 
   public boolean isCourseFull() {
-    return enrollmentCapacity > enrolledStudentCount;
+    return enrolledStudentCount >= enrollmentCapacity;
   }
 
   @Serial
