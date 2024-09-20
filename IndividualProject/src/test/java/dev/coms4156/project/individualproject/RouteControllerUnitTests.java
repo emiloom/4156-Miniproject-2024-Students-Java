@@ -30,6 +30,9 @@ public class RouteControllerUnitTests {
 
   Map<String, Department> departmentMap = new HashMap<>();
 
+  /**
+   * set up values for route controller testing, has to be set before each test.
+   */
   @BeforeEach
   public void setupRouteControllerForTesting() {
     MockitoAnnotations.openMocks(this);
@@ -38,6 +41,12 @@ public class RouteControllerUnitTests {
     comsCourses.put("3134", new Course("Brian Borowski", "301 URIS", "4:10-5:25", 250));
 
     departmentMap.put("COMS", new Department("COMS", comsCourses, "Luca Carloni", 2700));
+
+    Map<String, Course> econCourses = new HashMap<>();
+    econCourses.put("1004", new Course("Waseem Noor", "417 IAB", "11:40-12:55", 210));
+    econCourses.put("5050", new Course("Tamrat Gashaw", "428 PUP", "4:10-5:25", 125));
+
+    departmentMap.put("ECON", new Department("ECON", econCourses, "Michael Woodford", 2345));
 
     when(fakeMyFileDatabase.getDepartmentMapping()).thenReturn(departmentMap);
     IndividualProjectApplication.myFileDatabase = fakeMyFileDatabase;
@@ -149,6 +158,39 @@ public class RouteControllerUnitTests {
   @Test
   public void ttestFindCourseTime_Failure() {
     ResponseEntity<?> response = controller.findCourseTime("COMS", 0);
+    assertEquals(HttpStatus.NOT_FOUND, response.getStatusCode());
+  }
+
+  @Test
+  public void testRetrieveCourse_Success() {
+    ResponseEntity<?> response = controller.retrieveCourse("COMS", 3134);
+    assertEquals(HttpStatus.OK, response.getStatusCode());
+
+    response = controller.retrieveCourse("ECON", 1004);
+    assertEquals(HttpStatus.OK, response.getStatusCode());
+  }
+
+  @Test
+  public void testRetrieveCourse_Failure() {
+    ResponseEntity<?> response = controller.retrieveCourse("COMS", 5050);
+    assertEquals(HttpStatus.NOT_FOUND, response.getStatusCode());
+  }
+
+  @Test
+  public void testRetrieveCourses_Success() {
+    ResponseEntity<?> response = controller.retrieveCourses(5050);
+    assertEquals(HttpStatus.OK, response.getStatusCode());
+
+    response = controller.retrieveCourses(1004);
+    assertEquals(HttpStatus.OK, response.getStatusCode());
+
+    response = controller.retrieveCourses(3134);
+    assertEquals(HttpStatus.OK, response.getStatusCode());
+  }
+
+  @Test
+  public void testRetrieveCourses_Failure() {
+    ResponseEntity<?> response = controller.retrieveCourses(5051);
     assertEquals(HttpStatus.NOT_FOUND, response.getStatusCode());
   }
 

@@ -19,6 +19,9 @@ import org.springframework.test.context.ContextConfiguration;
 @ContextConfiguration
 public class DepartmentUnitTests {
 
+  /**
+   * set up test values for department testing.
+   */
   @BeforeAll
   public static void setupDepartmentForTesting() {
     String[] times = { "11:40-12:55", "4:10-5:25", "10:10-11:25", "2:40-3:55" };

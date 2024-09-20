@@ -1,5 +1,7 @@
 package dev.coms4156.project.individualproject;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -92,6 +94,39 @@ public class RouteController {
 
       }
       return new ResponseEntity<>("Department Not Found", HttpStatus.NOT_FOUND);
+    } catch (Exception e) {
+      return handleException(e);
+    }
+  }
+
+  /**
+   * Displays the details of the list of courses with a course code to the user or displays the
+   * proper error message in response to the request.
+   *
+   * @param courseCode A {@code int} representing the course the user wishes
+   *                   to retrieve.
+   *
+   * @return A {@code ResponseEntity} object containing either the details of the
+   *         courses with the same code, no matter the department and an HTTP 200 response or, 
+   *         an appropriate message indicating the proper response.
+   */
+  @GetMapping(value = "/retrieveCourses", produces = MediaType.APPLICATION_JSON_VALUE)
+  public ResponseEntity<?> retrieveCourses(@RequestParam(value = "courseCode") int courseCode) {
+    try {
+      List<String> courses = new ArrayList<>();
+      Map<String, Department> departmentMapping 
+                              = IndividualProjectApplication.myFileDatabase.getDepartmentMapping();
+      for (Map.Entry<String, Department> entry : departmentMapping.entrySet()) {
+        Department department = entry.getValue();
+        Map<String, Course> courseMapping = department.getCourseSelection();
+        if (courseMapping.containsKey(Integer.toString(courseCode))) {
+          courses.add(courseMapping.get(Integer.toString(courseCode)).toString());
+        }
+        if (!courses.isEmpty()) {
+          return new ResponseEntity<>(courses, HttpStatus.OK);
+        }
+      }
+      return new ResponseEntity<>("No Courses Found", HttpStatus.NOT_FOUND);
     } catch (Exception e) {
       return handleException(e);
     }
