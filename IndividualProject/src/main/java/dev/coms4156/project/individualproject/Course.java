@@ -1,6 +1,7 @@
 package dev.coms4156.project.individualproject;
 
-import java.io.*;
+import java.io.Serial;
+import java.io.Serializable;
 
 public class Course implements Serializable {
 
@@ -13,7 +14,8 @@ public class Course implements Serializable {
    * @param capacity           The maximum number of students that can enroll in the course.
    * @param enrolledStudentCount The number of students currently enrolled in the course
    */
-  public Course(String instructorName, String courseLocation, String timeSlot, int capacity, int enrolledStudentCount) {
+  public Course(String instructorName, String courseLocation, String timeSlot, int capacity,
+          int enrolledStudentCount) {
     this.courseLocation = courseLocation;
     this.instructorName = instructorName;
     this.courseTimeSlot = timeSlot;
@@ -22,8 +24,8 @@ public class Course implements Serializable {
   }
   
   /**
-   * Constructs a new Course object with the given parameters and a default amount of enrolled students set at 500. 
-   * Initial count starts at 0.
+   * Constructs a new Course object with the given parameters and a default amount of enrolled 
+   * students set at 500. Initial count starts at 0.
    *
    * @param instructorName     The name of the instructor teaching the course.
    * @param courseLocation     The location where the course is held.
@@ -34,17 +36,17 @@ public class Course implements Serializable {
     this(instructorName, courseLocation, timeSlot, capacity, 500);
   }
 
- /**
+  /**
    * Enrolls a student in the course if there is space available.
    *
    * @return true if the student is successfully enrolled, false otherwise.
    */
   public boolean enrollStudent() {
-   enrolledStudentCount++;
+    enrolledStudentCount++;
     return false;
   }
 
- /**
+  /**
    * Drops a student from the course if a student is enrolled.
    *
    * @return true if the student is successfully dropped, false otherwise.
@@ -68,7 +70,8 @@ public class Course implements Serializable {
 
   @Override
   public String toString() {
-    return "\nInstructor: " + instructorName +  "; Location: "  + courseLocation +  "; Time: " + courseTimeSlot;
+    return "\nInstructor: " + instructorName +  "; Location: "  + courseLocation
+      +  "; Time: " + courseTimeSlot;
   }
 
   public void reassignInstructor(String newInstructorName) {

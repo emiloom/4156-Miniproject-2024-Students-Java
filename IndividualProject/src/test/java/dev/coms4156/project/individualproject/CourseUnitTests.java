@@ -1,12 +1,12 @@
 package dev.coms4156.project.individualproject;
 
-import org.junit.jupiter.api.*;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.ContextConfiguration;
-
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.beans.Transient;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.ContextConfiguration;
 
 /**
  * Unit tests for the Course class.
@@ -41,13 +41,13 @@ public class CourseUnitTests {
   }
 
   @Test
-  public void isCourseFullTest_True(){
+  public void isCourseFullTest_True() {
     testCourse.setEnrolledStudentCount(550);
     assertEquals(testCourse.isCourseFull(), true);
   }
 
   @Test
-  public void isCourseFull_False(){
+  public void isCourseFull_False() {
     testCourse.setEnrolledStudentCount(20);
     assertEquals(testCourse.isCourseFull(), false);
   }
